@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (C) Les solutions géostack, Inc.
+#
+# This file is part of the First-Break Picking package.
+# Licensed under the terms of the MIT License.
+#
+# https://github.com/geo-stack/first_break_picking
+# =============================================================================
+
 import torch 
 import torch.nn as nn
 import torch.nn.functional as F
@@ -8,8 +18,6 @@ import matplotlib.pyplot as plt
 
 from first_break_picking.train_eval.unet import UNet
 import first_break_picking.train_eval.ai_tools as tools
-
-
 
 class BDiceLoss(nn.Module):
     def __init__(self, weight=None, size_average=True):

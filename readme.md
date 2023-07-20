@@ -174,8 +174,11 @@ predictor.predict(
 <div class="alert alert-block alert-warning">
 <b>Warning:</b> If you define the sampling rate incorrrectly, you can't see its effects on the plot (Y-axis is time step), but the saved time in first-break folder will be wrong.
 </div>
+<br>
 
-
+<!-- ## Issues and Questions -->
+**Ackowledgment:**<br>
+This work, developped by [Amir Mardan](https://github.com/AmirMardan), was supported by Mitacs through the Mitacs Elevate Program.
 
 
 [Top](#top)
