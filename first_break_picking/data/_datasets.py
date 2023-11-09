@@ -128,12 +128,15 @@ class FirstBreakDataset(Dataset):
         self.path_dir = data_dir
         self.file_names = file_names
         self.set_transforms()
+        self.loaded_files = []
         
     def __len__(self):
         return len(self.file_names)
     
     def __getitem__(self, index) -> Tuple[Tensor, Tensor]:
-        model = np.load(self.path_dir + "/" + self.file_names[index],
+        self.loaded_files.append(self.path_dir + "/" + self.file_names[index])
+        
+        model = np.load(self.loaded_files[-1],
                         allow_pickle=True)
         
         shot = self._transforms(model[0]).float()#.squeeze(0)
