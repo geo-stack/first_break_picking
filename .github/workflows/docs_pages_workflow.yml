@@ -2,6 +2,8 @@ name: docs_pages_workflow
  
 # execute this workflow automatically when a we push to main
 on:
+  push:
+    branches: [ "dev" ]
   pull_request:
     branches: [ "main" ]
 jobs:
@@ -11,7 +13,14 @@ jobs:
     container: debian:buster-slim
  
     steps:
- 
+      
+    - name:  🗑 Delete deployment
+      uses: strumwolf/delete-deployment-environment@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        environment: github-pages
+        onlyRemoveDeployments: true
+        
     - name: Prereqs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
