@@ -1,39 +1,34 @@
-name: docs_pages_workflow
- 
-# execute this workflow automatically when a we push to main
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+name: documentation
+
+on: 
+    push:
+        branches : ["main", dev]
+    pull_request:
+        branches : ["main"]
+
+permissions:
+  contents: write
+
 jobs:
- 
-  build_docs_job:
+  docs:
     runs-on: ubuntu-latest
-    container: debian:buster-slim
- 
     steps:
-      
-    - name:  🗑 Delete deployment
-      uses: strumwolf/delete-deployment-environment@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        environment: github-pages
-        onlyRemoveDeployments: true
-        
-    - name: Prereqs
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        apt-get update
-        apt-get install -y git
-        git clone "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
-      shell: bash
- 
-    - name: Execute script to build our documentation and update pages
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run:  |
-        chmod +x docs/docs_page.sh
-        "docs/docs_page.sh"
-      shell: bash
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - name: Install dependencies
+        run: |
+            pip install -r requirements-dev.txt
+            pip install -r requirements.txt
+
+      - name: Sphinx build
+        run: |
+          sphinx-build docs _build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/
+          force_orphan: true

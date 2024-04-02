@@ -47,6 +47,45 @@ class Predictor:
                  out_channels: int = 2,
                  save_segmentation: bool = False
             ) -> None:
+        """An object for predicting the first break picking
+
+        Parameters
+        ----------
+        path_to_save : str
+            location to save the result
+        upsampled_size_col : int
+            Number of columns in the upsampled shot
+        upsampled_size_row : int
+            Number of rows in the upsampled shot
+        type_of_problem : str, optional
+            _description_, by default "fb"
+        x_axis : np.ndarray, optional
+            _description_, by default None
+        y_axis : np.ndarray, optional
+            _description_, by default None
+        original_dispersion_size : Tuple, optional
+            _description_, by default (157, 490)
+        split_nt : int, optional
+            _description_, by default 0
+        overlap : float, optional
+            _description_, by default 0
+        dt : float, optional
+            _description_, by default 1.0
+        checkpoint_path : str, optional
+            _description_, by default None
+        model_name : str, optional
+            _description_, by default "unet_resnet"
+        smoothing_threshold : int, optional
+            _description_, by default 20
+        features : List[int], optional
+            _description_, by default [16, 32, 64, 128]
+        in_channels : int, optional
+            _description_, by default 1
+        out_channels : int, optional
+            _description_, by default 2
+        save_segmentation : bool, optional
+            _description_, by default False
+        """
         
         self.path_to_save = path_to_save
         self.smoothing_threshold = smoothing_threshold
@@ -88,7 +127,14 @@ class Predictor:
          
         self.smoothing_value = smoothing_threshold
         
-    def predict(self, path_data):
+    def predict(self, path_data: str):
+        """Predict FB
+
+        Parameters
+        ----------
+        path_data : str
+            Paht to the data
+        """
         file_name = path_data.split("/")[-1]
         path_data = "/".join(path_data.split("/")[:-1])
         ffid = ".".join(file_name.split(".")[:-1])

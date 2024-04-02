@@ -28,6 +28,18 @@ class Upsample:
     
     
 def normalize_metrics(metrics: dict) -> dict:
+    """Normalize the loss in metrics dictionary
+
+    Parameters
+    ----------
+    metrics : dict
+        metrics dictionary
+
+    Returns
+    -------
+    dict
+        metrics dictionary
+    """
     for key, value in metrics.items():
         if key.split("_")[1] == "loss":
             value = np.array(value)
