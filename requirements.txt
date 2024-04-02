@@ -1,0 +1,6 @@
+segmentation-models-pytorch
+segyio
+pandas
+numpy
+matplotlib
+scipy
