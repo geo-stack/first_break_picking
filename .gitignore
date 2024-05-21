@@ -1,4 +1,10 @@
 *.pyc
+.DS_Store
+*.log
 
 .vscode/
 _build/
+
+preprocessed/
+picked_fb_test_data/
+example/checkpoints/
