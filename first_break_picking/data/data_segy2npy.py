@@ -65,7 +65,7 @@ def save_shots_fb(dataset_dir: str,
                 split_nt: int,
                 overlap: float,
                 time_window: List[int],
-                fbt_file_header: List[int or None],
+                fbt_file_header: Union[int, None],
                 fbt_time_column: int,
                 dt: float,
                 dir_to_save: str,
@@ -289,28 +289,28 @@ def get_args():
             args.split_nt, args.overlap, args.fbt_time_column, args.fbt_file_header)
     
     
-if __name__ == "__main__":    
-    (path_to_load, path_to_save, project_name, 
-    operation, time_window, split_nt, overlap, 
-    fbt_time_column, fbt_file_header) = get_args()
+# if __name__ == "__main__":    
+    # (path_to_load, path_to_save, project_name, 
+    # operation, time_window, split_nt, overlap, 
+    # fbt_time_column, fbt_file_header) = get_args()
     
-    if project_name is None:
-        raise NameError("Please define the name of the project")
+    # if project_name is None:
+    #     raise NameError("Please define the name of the project")
     
-    path_to_load: str = path_to_load + f"/{project_name}/{operation}"
-    path_to_save: str = path_to_save + f"/{project_name}/{operation}"
+    # path_to_load: str = path_to_load + f"/{project_name}/{operation}"
+    # path_to_save: str = path_to_save + f"/{project_name}/{operation}"
     
-    Path(path_to_save).mkdir(exist_ok=True, parents=True)
+    # Path(path_to_save).mkdir(exist_ok=True, parents=True)
 
-    shot_to_npy(dataset_dir=path_to_load,
-                dir_to_save=path_to_save,
-                split_nt= split_nt,
-                overlap = overlap,
-                time_window=time_window,
-                fbt_file_header=fbt_file_header,
-                fbt_time_column=fbt_time_column,
-                scale=True,
-                grayscale=True, shot_ext=".npy")
+    # shot_to_npy(dataset_dir=path_to_load,
+    #             dir_to_save=path_to_save,
+    #             split_nt= split_nt,
+    #             overlap = overlap,
+    #             time_window=time_window,
+    #             fbt_file_header=fbt_file_header,
+    #             fbt_time_column=fbt_time_column,
+    #             scale=True,
+    #             grayscale=True, shot_ext=".npy")
     
     # Fast calling
         # python data_segy2npy.py --project_name amem --fbt_file_header 9
