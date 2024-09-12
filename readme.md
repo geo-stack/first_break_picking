@@ -11,6 +11,7 @@ For this purpose, we use a U-net to segment the data as before and after first a
     - [2.2 Data preprocessing](#22-data-preprocessing)
     - [2.3 Training for FB picking](#23-training-for-fb-picking)
     - [2.4 Predicting the first break of one seismic shot](#24-predicting-the-first-break-of-one-seismic-shot)
+  - [3. Cite this work](#3-cite-this-work)
 
 In a seismic shot record, the first arrival is usually the direct wave from the source followed by refractions (Figure 1). The travel time of a seismic wave from a source to a geophone is called first break. First breaks are invaluable sources of information in near-surface studies. We can employ first breaks to obtain a velocity model of the near-surface. In addition to the importance of first breaks for refraction inversion and understanding the characteristics of the near-surface, they can be employed to perform a successful reflection seismic processing and multi-channel analysis of surface waves (MASW).
 
@@ -157,8 +158,8 @@ predictor = Predictor(
 - `checkpoint_path`: Path of the checkpoint that is saved after training.
 - `split_nt` Number of columns in each subimage.
 - `overlap`: Overlap of subimages of one shot.
-- `upsampled_size_row`: Number of rows in upsampled image.
-- `upsampled_size_col`: Number of columns in upsampled image.
+- `upsampled_size_row`: Number of rows in the upsampled image.
+- `upsampled_size_col`: Number of columns in the upsampled image.
 - `dt`: Temporal sampling rate.
 - `smoothing_threshold`: An integer used to avoid the generated artifacts above the true FB.
   
@@ -176,6 +177,21 @@ predictor.predict(
 </div>
 <br>
 
+## 3. Cite this work
+
+If you use this package or the dataset, please cite the following paper.
+```
+   @article{mardan2024fine,
+       title = {A fine‐tuning workflow for automatic first‐break picking with deep learning.},
+       author = {Mardan, Amir and Blouin, Martin and Fabien-Ouellet, Gabriel and Giroux, Bernard and Vergniault, Christophe and Gendreau, Jeremy},
+       year = {2024},
+       journal = {Near Surface Geophysics},
+       publisher={Wiley Online Library},
+       pages = {539-552},
+       doi = {https://doi.org/10.1002/nsg.12316}
+   }
+```
+   
 <!-- ## Issues and Questions -->
 **Acknowledgment:**<br>
 This work, developed by [Amir Mardan](https://github.com/AmirMardan), was supported by Mitacs through the Mitacs Elevate Program.
