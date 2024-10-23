@@ -21,10 +21,12 @@ class Upsample:
     def __init__(self, size: Tuple[int, int]):
         
         self._upsampler = torch.nn.Upsample(size=size)
-    
+        self.size = self._upsampler.size
+        
     def __call__(self, data, label):
         
-        return self._upsampler(data), self._upsampler(label).long()
+        return (self._upsampler(data.unsqueeze(0)).squeeze(0), 
+                (self._upsampler(label.unsqueeze(0)).squeeze(0)).long())
     
     
 def normalize_metrics(metrics: dict) -> dict:

@@ -796,3 +796,39 @@ def load_dispersion_curve(curves: pd.DataFrame,
     curve = curve[(curve["frequency"] <= fmax) & (curve["frequency"] >= fmin)]
     
     return np.floor(curve) #  / [dv, df])
+
+def fb_pre_process_data(shot: np.ndarray,
+                     fb: np.ndarray,
+                     split_nt,
+                     overlap,
+                     time_window: List[int],
+                     scale: bool,
+                     grayscale: bool
+                     ): 
+    """
+    Read one shot and first break file
+    """ 
+    if time_window is not None:
+        shot = shot[time_window[0]:time_window[1], :]
+    if scale:
+        shot = data_normalize_and_limiting(data=shot)
+    if grayscale:
+        shot = shot_to_gray_scale(shot)
+
+    points = starting_points(shot.shape[1], split_nt, overlap)
+    sub_shots = shot_spliting(
+        shot=shot,
+        points=points,
+        split_nt=split_nt
+        )
+    
+    sub_fbs = [None]
+    
+    if fb is not None:
+        sub_fbs = fb_spliting(
+            fb=fb,
+            points=points,
+            split_nt=split_nt
+        )
+        
+    return sub_shots, shot.shape[1], sub_fbs
