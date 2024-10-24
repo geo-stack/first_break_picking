@@ -25,8 +25,8 @@ class Upsample:
         
     def __call__(self, data, label):
         
-        return (self._upsampler(data.unsqueeze(0)).squeeze(0), 
-                (self._upsampler(label.unsqueeze(0)).squeeze(0)).long())
+        return (self._upsampler(data), 
+                (self._upsampler(label)).long())
     
     
 def normalize_metrics(metrics: dict) -> dict:

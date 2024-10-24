@@ -158,9 +158,9 @@ class Predictor:
         data_info = data_info.set_index("shot_id")
         
         # nsp:  data.shape=[1, 2, 1, 512, 32]
-        data, _ = self.upsampler(data.squeeze(), data.squeeze())
+        data, _ = self.upsampler(data.squeeze(0), data.squeeze(0))
         #nsp:  data.shape= [2, 512, 512])
-        data = data.unsqueeze(1)
+        # data = data.unsqueeze(1)
         
         shot, predicted_pick, predicted_segment = self.predict_test(
                     batch=data, 

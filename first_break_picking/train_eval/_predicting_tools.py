@@ -136,7 +136,7 @@ def fb_predict_test(
             ):
     n_original_time_sampels = case_specific_parameters["n_original_time_sampels"]
     
-    n_trace = data_info.loc[shot_id][0]
+    n_trace = data_info.loc[shot_id].iloc[0]
     device = "cpu"
     model = model.to(device=device)
     
