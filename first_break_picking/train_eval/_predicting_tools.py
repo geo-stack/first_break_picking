@@ -66,7 +66,6 @@ def predict(model,
 def fb_predict_validation(
             batch: torch.Tensor,
             model,
-            upsampler,
             split_nt: int,
             overlap: float,
             shot_id: str,
@@ -76,6 +75,7 @@ def fb_predict_validation(
             # case_specific_parameters: dict,
             case_specific_parameters
             ):
+    # TODO Write test for this function
     n_original_time_sampels = case_specific_parameters["n_original_time_sampels"]
     
     n_trace = data_info.loc[shot_id][0]
@@ -93,9 +93,10 @@ def fb_predict_validation(
     batch = batch.squeeze(0).to(device=device)
     n_subshots = batch.shape[0]
     
-    batch, true_mask = upsampler(
-        batch,
-        true_mask.squeeze(0))
+    # batch, true_mask = upsampler(
+    #     batch,
+    #     true_mask.squeeze(0))
+    true_mask.squeeze_(0)
         
     predicted, prob = predict(model=model, data=batch,
                     binary=False)
@@ -126,7 +127,6 @@ def fb_predict_validation(
 def fb_predict_test(
     batch: torch.Tensor,
     model,
-    upsampler,
     split_nt: int,
     overlap: float,
     shot_id: str,
@@ -136,7 +136,7 @@ def fb_predict_test(
             ):
     n_original_time_sampels = case_specific_parameters["n_original_time_sampels"]
     
-    n_trace = data_info.loc[shot_id][0]
+    n_trace = data_info.loc[shot_id].iloc[0]
     device = "cpu"
     model = model.to(device=device)
     
@@ -146,12 +146,13 @@ def fb_predict_test(
         n_trace = n_trace,
         overlap = overlap
         )
-    
+
+    # batch [1, n_subshot, 1, n_upsample_row, n_upsample_col]
     batch = batch.squeeze(0).to(device=device)
     n_subshots = batch.shape[0]
     
-    batch, _ = upsampler(
-        batch, batch)
+    # batch, _ = upsampler(
+    #     batch, batch)
     
     predicted, prob = predict( # Check why I use prob here but not for validation
         model=model, data=batch,
@@ -160,14 +161,16 @@ def fb_predict_test(
     prob1 = downsample(prob)
     predicted = torch.argmax(prob1, dim=1)
     batch = downsample(batch).squeeze(1)
-                
+    # batch ([n_subshots, n_time_steps, 22])
+    
     predicted1 = torch.zeros((n_original_time_sampels, n_trace))
     shot1 = torch.zeros((n_original_time_sampels, n_trace))
 
     for i in range(n_subshots):
         predicted1[:, points[i]:points[i+1]] = predicted[i,:, :points[i+1] - points[i]]
         shot1[:, points[i]:points[i+1]] = batch[i,:, :points[i+1] - points[i]]
-        
+    # shot1 ([n_time_steps, number of total traces in the original shot])
+    
     predicted_pick = _fb_smooth_result(
         predicted=predicted1, 
         n_trace=n_trace, 

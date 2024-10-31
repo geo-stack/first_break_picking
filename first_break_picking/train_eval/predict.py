@@ -20,12 +20,14 @@ import os
 from tqdm import tqdm
 import numpy as np
 
-# from first_break_picking.data import data_utils as data_tools
+import first_break_picking.data.data_utils as data_tools
 from first_break_picking.data.dataset import get_predict_dataset
 from first_break_picking.train_eval.unet import UNet
 import first_break_picking.train_eval.parameter_tools as ptools
 import first_break_picking.train_eval.ai_tools as tools
-from first_break_picking.data.data_segy2npy import load_one_general_file
+from first_break_picking.data.data_segy2npy import (load_one_general_file,
+                                                    general_transform,
+                                                    info_dict_2_df)
 
 class Predictor:
     def __init__(self,
@@ -126,7 +128,52 @@ class Predictor:
              )
          
         self.smoothing_value = smoothing_threshold
+    
+    def predict_ndarray_fb(self,
+                           shot: np.ndarray) -> np.ndarray:
         
+        # No need to change. It is important when we have more than one shot
+        ffid: str = "12" 
+        
+        sub_shots, n_total_traces, _ = data_tools.fb_pre_process_data(
+            shot, fb=None,
+            split_nt=self.split_nt,
+            overlap=self.overlap,
+            time_window=[0, self.upsampled_size_row],
+            scale=True,
+            grayscale=True
+            )
+        
+        n_subshots = len(sub_shots)
+        data = torch.zeros((1, n_subshots, 1, 
+                            self.upsampled_size_row, self.split_nt))
+        #nsp:  data.shape=[1, 2, 1, 512, 32])
+        
+        _transformer = general_transform()
+        for i, sub in enumerate(sub_shots):
+            data[0, i, 0, ...] = _transformer(sub)
+        #nsp:  data.shape=[1, 2, 1, 512, 32])
+        
+        data_info = info_dict_2_df({str(ffid): [n_total_traces, n_subshots]})
+        data_info = data_info.set_index("shot_id")
+        
+        # nsp:  data.shape=[1, 2, 1, 512, 32]
+        data, _ = self.upsampler(data.squeeze(0), data.squeeze(0))
+        #nsp:  data.shape= [2, 512, 512])
+        # data = data.unsqueeze(1)
+        
+        shot, predicted_pick, predicted_segment = self.predict_test(
+                    batch=data, 
+                    model=self.model,
+                    split_nt=self.split_nt,
+                    overlap=self.overlap,
+                    shot_id=ffid,
+                    smoothing_threshold=self.smoothing_threshold,
+                    data_info=data_info,
+                    case_specific_parameters=self.case_specific_parameters
+                )
+        return np.array(predicted_pick * self.dt)
+    
     def predict(self, path_data: str):
         """Predict FB
 

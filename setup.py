@@ -12,7 +12,7 @@ setup(
     packages=find_packages(exclude=["*.pyc"]),
     include_package_data=True,
     package_data={
-        "": ["*.txt", "checkpoint_20_2projects.tar"],
+        "": ["*.txt", "fb_20.tar"],
         },
     install_requires = [
         # "segyio",
