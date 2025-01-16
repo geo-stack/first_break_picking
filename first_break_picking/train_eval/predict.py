@@ -172,7 +172,10 @@ class Predictor:
                     data_info=data_info,
                     case_specific_parameters=self.case_specific_parameters
                 )
-        return np.array(predicted_pick * self.dt)
+        if predicted_pick is None:
+            return -999.03125 * np.ones(shot.shape[1])
+        else:
+            return np.array(predicted_pick * self.dt)
     
     def predict(self, path_data: str):
         """Predict FB
