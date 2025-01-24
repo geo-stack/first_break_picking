@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>First-Break Picking Using Deep Learning &mdash; First Break Picking 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Train" href="train.html" />
+    <link rel="prev" title="Welcome to First Break Picking’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            First Break Picking
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Quick Start:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">First-Break Picking Using Deep Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-break-picking">3. First-Break Picking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initial-data-files">3.1 Initial data files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-preprocessing">3.2 Data preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training-for-fb-picking">3.3 Training for FB picking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predicting-the-first-break-of-one-seismic-shot">3.4 Predicting the first break of one seismic shot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Train and Predict:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="train.html">Train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict.html">Predict</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">First Break Picking</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">First-Break Picking Using Deep Learning</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/readme.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p><a id="top"></a></p>
+<section id="first-break-picking-using-deep-learning">
+<h1>First-Break Picking Using Deep Learning<a class="headerlink" href="#first-break-picking-using-deep-learning" title="Link to this heading"></a></h1>
+<p><a id="1-introduction"></a></p>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This repository is used to implement first-break (FB) picking task using deep learning.
+For this purpose, we use a U-net to segment the data as before and after first arrivals.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#first-break-picking-using-deep-learning"><span class="xref myst">First-Break Picking Using Deep Learning</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#1-introduction"><span class="xref myst">1. Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="#2-installation"><span class="xref myst">2. Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#3-first-break-picking"><span class="xref myst">3. First-Break Picking</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#31-initial-data-files"><span class="xref myst">3.1 Initial data files</span></a></p></li>
+<li><p><a class="reference internal" href="#32-data-preprocessing"><span class="xref myst">3.2 Data preprocessing</span></a></p></li>
+<li><p><a class="reference internal" href="#33-training-for-fb-picking"><span class="xref myst">3.3 Training for FB picking</span></a></p></li>
+<li><p><a class="reference internal" href="#34-predicting-the-first-break-of-one-seismic-shot"><span class="xref myst">3.4 Predicting the first break of one seismic shot</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>In a seismic shot record, the first arrival is usually the direct wave from the source followed by refractions (Figure 1). The travel time of a seismic wave from a source to a geophone is called first break. First breaks are invaluable sources of information in near-surface studies. We can employ first breaks to obtain a velocity model of the near-surface. In addition to the importance of first breaks for refraction inversion and understanding the characteristics of the near-surface, they can be employed to perform a successful reflection seismic processing and multi-channel analysis of surface waves (MASW).</p>
+<p><img alt="Alt text" src="_images/waves.png" /></p>
+<p><a id="2-installation"></a></p>
+</section>
+<section id="installation">
+<h2>2. Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>To install this package, you need to first clone the code</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install git+https://github.com/geo-stack/first_break_picking.git</span>
+</pre></div>
+</div>
+<p><a id="3-first-break-picking"></a></p>
+</section>
+<section id="first-break-picking">
+<h2>3. First-Break Picking<a class="headerlink" href="#first-break-picking" title="Link to this heading"></a></h2>
+<p>We solve the first-break picking as a segmentation problem. It means that we have two segments,</p>
+<ol class="arabic simple">
+<li><p>before FB,</p></li>
+<li><p>after FB.</p></li>
+</ol>
+<p>In this way, FB can be picked as the interface between two segments.
+<img alt="segmentation" src="_images/fb_introducing_fb_segmentation.png" /></p>
+<p>In the next sections, we see how to prepare the dataset and the processing steps that can be done to improve the accuracy of the results.</p>
+<p><a id="3-first-break-picking"></a></p>
+<section id="initial-data-files">
+<h3>3.1 Initial data files<a class="headerlink" href="#initial-data-files" title="Link to this heading"></a></h3>
+<p>To use this package, a user needs to prepare the dataset appropriately.
+In one folder, we need to have the seismic data and corresponding FB (for training) in <code class="docutils literal notranslate"><span class="pre">.npy</span></code> and <code class="docutils literal notranslate"><span class="pre">.txt</span></code> format.
+An example of the first-break file can be seen in the following figure.</p>
+<p><img alt="segmentation" src="_images/fb_data.png" /></p>
+<p><a id="32-data-preprocessing"></a></p>
+</section>
+<section id="data-preprocessing">
+<h3>3.2 Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading"></a></h3>
+<p>After preparing the initial data files in <code class="docutils literal notranslate"><span class="pre">.npy</span></code> and <code class="docutils literal notranslate"><span class="pre">.txt</span></code> formats, we can perform some preprocessing steps using <code class="docutils literal notranslate"><span class="pre">save_shots_fb</span></code>. To explain the arguments of this function, let’s look at the following figure.</p>
+<p><a id="Figure2"></a>
+<img alt="data_preprocessing" src="_images/fb_data_preparing.png" /></p>
+<ul class="simple">
+<li><p>We have a great data imbalance which leads to a decrease in accuracy. To deal with this problem, we crop the data (a) to generate data presented in (b). For this purpose, <code class="docutils literal notranslate"><span class="pre">save_shots_fb</span></code> gets an argument called <code class="docutils literal notranslate"><span class="pre">time_window</span></code> which gets a list with two integer values showing the beginning and the end of the cropping window (in terms of sample and NOT time). Basically, the first element of this list should be <code class="docutils literal notranslate"><span class="pre">0</span></code>. For example, I use <code class="docutils literal notranslate"><span class="pre">time_window</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">512]</span></code>.</p></li>
+<li><p>In the next step, we scale the data to increase the accuracy and ease of learning. This step leads to the image (c). To do so, user can use two arguments, <code class="docutils literal notranslate"><span class="pre">scale</span></code> and <code class="docutils literal notranslate"><span class="pre">grayscale</span></code>, which are boolean and should be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p>For data augmentation, we divide each seismic shot into some subimages with a specific overlap (e and d). For this purpose, <code class="docutils literal notranslate"><span class="pre">save_shots_fb</span></code> gets <code class="docutils literal notranslate"><span class="pre">split_nt</span></code> to specify the number of columns in each subimage and <code class="docutils literal notranslate"><span class="pre">overlap</span></code> which defines the overlap of subimages in terms of percentage, between <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. I usually use <code class="docutils literal notranslate"><span class="pre">overlap</span> <span class="pre">=</span> <span class="pre">0.15</span></code>. For shots with 48 traces, I use <code class="docutils literal notranslate"><span class="pre">split_nt</span> <span class="pre">=</span> <span class="pre">22</span></code>, but in the case of shots with more traces, we can use a larger value for <code class="docutils literal notranslate"><span class="pre">split_nt</span></code>.</p></li>
+<li><p>It is really important to provide <code class="docutils literal notranslate"><span class="pre">save_shots_fb</span></code> with the correct value for the sampling rate as <code class="docutils literal notranslate"><span class="pre">dt</span></code>.</p></li>
+<li><p>This function also gets two other arguments to specify the extension of shot and first-break files as <code class="docutils literal notranslate"><span class="pre">shot_ext</span></code> and <code class="docutils literal notranslate"><span class="pre">fb_ext</span></code>. This can be used to develop the code easily in case we want to load <code class="docutils literal notranslate"><span class="pre">.segy</span></code> or <code class="docutils literal notranslate"><span class="pre">.json</span></code> files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save_shots_fb</span></code> saves the processed data at <code class="docutils literal notranslate"><span class="pre">dir_to_save</span></code>.</p></li>
+</ul>
+<p>So, here is how to call this function,</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">first_break_picking.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_shots_fb</span>
+
+<span class="n">data_info</span> <span class="o">=</span> <span class="n">save_shots_fb</span><span class="p">(</span>
+        <span class="n">dataset_dir</span><span class="o">=</span><span class="n">path_to_load</span><span class="p">,</span>
+        <span class="n">dir_to_save</span><span class="o">=</span><span class="n">path_save</span><span class="p">,</span>
+        <span class="n">split_nt</span><span class="o">=</span> <span class="n">split_nt</span><span class="p">,</span>
+        <span class="n">overlap</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">,</span>
+        <span class="n">time_window</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_time_sampels</span><span class="p">],</span>
+        <span class="n">fbt_file_header</span><span class="o">=</span><span class="n">fbt_file_header</span><span class="p">,</span>
+        <span class="n">fbt_time_column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">grayscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">dt</span><span class="o">=</span><span class="n">dt_project</span><span class="p">,</span>
+        <span class="n">shot_ext</span><span class="o">=</span><span class="s2">&quot;.npy&quot;</span><span class="p">,</span>
+        <span class="n">fb_ext</span><span class="o">=</span><span class="s2">&quot;.txt&quot;</span> <span class="k">if</span> <span class="n">phase</span><span class="o">==</span><span class="s2">&quot;train&quot;</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+
+<span class="n">data_info</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_save</span><span class="si">}</span><span class="s2">_data_info.txt&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">save_shots_fb</span></code> returns a Pandas DataFrame which should be saved for using during the prediction.
+Here is an example of saved data for a project.</p>
+<p><img alt="files" src="_images/fb_preprocessed_data.png" /></p>
+<div class="alert alert-block alert-warning">
+<b>Warning:</b> Please be careful about choosing the appropriate sampling rate.
+</div>
+<p><a id="33-training-for-fb-picking"></a></p>
+</section>
+<section id="training-for-fb-picking">
+<h3>3.3 Training for FB picking<a class="headerlink" href="#training-for-fb-picking" title="Link to this heading"></a></h3>
+<p>To train a network, we use the function <code class="docutils literal notranslate"><span class="pre">train</span></code>. This function gets some arguments that are presented here.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">train_data_path</span></code>: Path of the training dataset (can be a list of different datasets).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upsampled_size_row</span></code>: We upsample the data samples before sending them into the model. This variable is used to define the number of rows in upsampled size (must be dividable by 16).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upsampled_size_col</span></code>: This variable is used to define the number of columns in upsampled size (must be dividable by 16).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>: Number of data samples that are taken into account together to calculate the loss.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">val_percentage</span></code>: A value between 0 to 1 to specify the percentage of data that is used to test the generalizability of the algorithm.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epochs</span></code>: Number of iterations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>: This is used to define the learning rate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path_to_save</span></code>: Path to a folder to save the checkpoints and loss values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">checkpoint_path</span></code>: In case a user wants to start training a pretrained network, the path of the checkpoint should be specified here.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step_size_milestone</span></code>: Is used to define a learning rate scheduler. If you want to halve the learning rate at a specific number of epochs, this argument should be used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span></code>: This is a boolean and can be used to specify if the user likes to see the learning procedure. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, a figure would be presented like the following example.
+<img alt="files" src="_images/fb_train.gif" /></p></li>
+</ul>
+<p>Here is an example of calling this function,</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">first_break_picking</span><span class="w"> </span><span class="kn">import</span> <span class="n">train</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">first_break_picking.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">seed_everything</span>
+
+<span class="n">seed_everything</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">train_data_path</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;path/to/train/dataset_0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;path/to/train/dataset_n&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">train</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">,</span> 
+      <span class="n">upsampled_size_row</span><span class="o">=</span><span class="n">n_time_sampels</span><span class="p">,</span>
+      <span class="n">upsampled_size_col</span><span class="o">=</span><span class="n">upsampled_size_col</span><span class="p">,</span>
+      <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> 
+      <span class="n">val_percentage</span><span class="o">=</span><span class="n">val_percentage</span><span class="p">,</span>
+      <span class="n">epochs</span><span class="o">=</span><span class="n">num_epcohs</span><span class="p">,</span> 
+      <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> 
+      <span class="n">device</span><span class="o">=</span><span class="s2">&quot;mps&quot;</span><span class="p">,</span>
+      <span class="n">path_to_save</span><span class="o">=</span><span class="s2">&quot;path/to/save/results/checkpoints&quot;</span><span class="p">,</span>
+      <span class="n">save_frequency</span><span class="o">=</span><span class="n">num_epcohs</span><span class="p">,</span>
+      <span class="n">loss_fn_name</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+      <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+      <span class="n">checkpoint_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+      <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">],</span>
+      <span class="n">in_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+      <span class="n">out_channels</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+      <span class="n">encoder_weight</span><span class="o">=</span><span class="s2">&quot;imagenet&quot;</span><span class="p">,</span>
+      <span class="n">step_size_milestone</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+      <span class="n">show</span><span class="o">=</span><span class="kc">True</span>
+      <span class="p">)</span>
+</pre></div>
+</div>
+<p><a id="34-predicting-the-first-break-of-one-seismic-shot"></a></p>
+</section>
+<section id="predicting-the-first-break-of-one-seismic-shot">
+<h3>3.4 Predicting the first break of one seismic shot<a class="headerlink" href="#predicting-the-first-break-of-one-seismic-shot" title="Link to this heading"></a></h3>
+<p>If you want to predict the first breaks in numerous shots, you should create the dataset as described <a class="reference internal" href="#22-data-preprocessing"><span class="xref myst">here</span></a>.
+However, if you need to predict the first break on only one shot (or all shots in a loop without saving dataset), the class <code class="docutils literal notranslate"><span class="pre">Predictor</span></code> should be used.
+This object can be created as,</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">first_break_picking</span><span class="w"> </span><span class="kn">import</span> <span class="n">Predictor</span>
+
+<span class="n">predictor</span> <span class="o">=</span> <span class="n">Predictor</span><span class="p">(</span>
+        <span class="n">path_to_save</span><span class="o">=</span><span class="s2">&quot;path/to/save/results/checkpoints&quot;</span><span class="p">,</span>
+        <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint</span><span class="p">,</span>
+        <span class="n">split_nt</span><span class="o">=</span><span class="n">split_nt</span><span class="p">,</span> 
+        <span class="n">overlap</span><span class="o">=</span><span class="n">overlap</span><span class="p">,</span> 
+        <span class="n">upsampled_size_row</span><span class="o">=</span><span class="n">n_time_sampels</span><span class="p">,</span> 
+        <span class="n">upsampled_size_col</span><span class="o">=</span><span class="n">upsampled_size_col</span><span class="p">,</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="p">,</span>
+        <span class="n">smoothing_threshold</span><span class="o">=</span><span class="n">smoothing_threshold</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;unet_resnet&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">path_to_save</span></code>: Path to a folder to save the result (will be overwritten).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">checkpoint_path</span></code>: Path of the checkpoint that is saved after training.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">split_nt</span></code> Number of columns in each subimage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">overlap</span></code>: Overlap of subimages of one shot.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upsampled_size_row</span></code>: Number of rows in upsampled image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upsampled_size_col</span></code>: Number of columns in upsampled image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dt</span></code>: Temporal sampling rate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">smoothing_threshold</span></code>: An integer used to avoid the generated artifacts above the true FB.</p></li>
+</ul>
+<p>By creating this object, we can now give the path of one seismic shot (as presented in <a class="reference internal" href="#Figure2"><span class="xref myst">Figure 2a</span></a>) to the method <code class="docutils literal notranslate"><span class="pre">predict</span></code> and get the first break.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+        <span class="n">path_data</span><span class="o">=</span><span class="n">path_data</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="data_preprocessing" src="_images/fb_predict_one.png" /></p>
+<div class="alert alert-block alert-warning">
+<b>Warning:</b> If you define the sampling rate incorrectly, you can't see its effects on the plot (Y-axis is time step), but the saved time in the first-break folder will be wrong.
+</div>
+<br>
+<!-- ## Issues and Questions -->
+<p><strong>Acknowledgment:</strong><br>
+This work, developed by <a class="reference external" href="https://github.com/AmirMardan">Amir Mardan</a>, was supported by Mitacs through the Mitacs Elevate Program.</p>
+<p><a class="reference internal" href="#top"><span class="xref myst">Top</span></a></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to First Break Picking’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="train.html" class="btn btn-neutral float-right" title="Train" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Amir Mardan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
