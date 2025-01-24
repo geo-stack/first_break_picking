@@ -347,7 +347,7 @@ def predict(base_dir: str,
     with torch.no_grad():
         if validation:
             true_masks = []
-            for shot_number, (batch, true_mask, fbt_file_name ) in enumerate(loop):
+            for shot_number, (batch, true_mask, fbt_file_name) in enumerate(loop):
                 fbt_file_name = fbt_file_name[0]
                 
                 shot1, predicted_pick, predicted_segment, true_mask1 = predict_validation(
@@ -358,7 +358,7 @@ def predict(base_dir: str,
                     overlap=overlap,
                     shot_id=fbt_file_name,
                     smoothing_threshold=smoothing_threshold,
-                    upsampler=upsampler,
+                    # upsampler=upsampler,
                     data_info=data_info,
                     case_specific_parameters=case_specific_parameters
                 )
@@ -373,14 +373,18 @@ def predict(base_dir: str,
             for shot_number, (batch, fbt_file_name) in enumerate(loop):
                 fbt_file_name = fbt_file_name[0]
                 
+                # nsp:  data.shape=[1, 3, 1, 512, 22]
+                batch, _ = upsampler(batch.squeeze(0), batch.squeeze(0))
+                #nsp:  data.shape= [3, 1, 512, 512])
+                
                 shot, predicted_pick, predicted_segment = predict_test(
-                    batch=batch, 
+                    batch=batch.unsqueeze(0), 
                     model=model,
                     split_nt=split_nt,
                     overlap=overlap,
                     shot_id=fbt_file_name,
                     smoothing_threshold=smoothing_threshold,
-                    upsampler=upsampler,
+                    # upsampler=upsampler,
                     data_info=data_info,
                     case_specific_parameters=case_specific_parameters
                 )

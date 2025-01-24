@@ -1,5 +1,5 @@
 #%% ============ Initiate ===============
-num_epcohs = 5
+num_epcohs = 20
 
 batch_size = 15
 split_nt = 22

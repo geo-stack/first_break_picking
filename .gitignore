@@ -10,3 +10,5 @@ picked_fb_test_data/
 example/checkpoints/
 
 *.egg-info
+0_fbp_env/
+build/

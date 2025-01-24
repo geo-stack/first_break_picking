@@ -1,14 +1,13 @@
 #%% ========== Loading required packages 
 import pandas as pd
-import sys
 import os.path as osp
 import matplotlib.pyplot as plt
 from time import time
 from pathlib import Path
 import shutil
 from matplotlib.ticker import MaxNLocator
-
-sys.path.append(osp.abspath(osp.join(__file__, "../../")))
+# import sys
+# sys.path.append(osp.abspath(osp.join(__file__, "../../")))
 from first_break_picking import train
 from first_break_picking.tools import seed_everything
 from first_break_picking.data import save_shots_fb

@@ -1,10 +1,10 @@
 #%% ========== Loading required packages 
-import sys
 import os.path as osp
 from pathlib import Path
 import shutil
 
-sys.path.append(osp.abspath(osp.join(__file__, "../../")))
+# import sys
+# sys.path.append(osp.abspath(osp.join(__file__, "../../")))
 from first_break_picking.data import save_shots_fb
 from first_break_picking import predict
 
