@@ -8,3 +8,5 @@ _build/
 preprocessed/
 picked_fb_test_data/
 example/checkpoints/
+
+*.egg-info
